@@ -12,8 +12,11 @@ def start(update, co):
 
 
 def echo(update, co):
-    a = [InputMediaPhoto(f"https://static-maps.yandex.ru/1.x/?ll={update.message.text}&spn=0.006457,0.00619&l=map")]
-    bot.send_media_group(chat_id=update.message.from_user.id, media=a)
+    try:
+        a = [InputMediaPhoto(f"https://static-maps.yandex.ru/1.x/?ll={update.message.text}&spn=0.006457,0.00619&l=map")]
+        bot.send_media_group(chat_id=update.message.from_user.id, media=a)
+    except Exception:
+        bot.send_message(update.message.from_user.id, "Указаны неверные координаты! Пример ввода: -81.90169,41.3039213")
 
 
 dp.add_handler(CommandHandler("start", start))
